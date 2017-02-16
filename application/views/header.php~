@@ -1,0 +1,330 @@
+<!doctype html>
+<!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no"/>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content=" Innoforms let you build instant digital forms to replace your paper. Start building a efficient workforce by replacing paper forms and letting your team access instant data."/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<?php 
+  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+  $ip=$_SERVER['HTTP_CLIENT_IP'];}
+  elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+  $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];} else {
+  $ip=$_SERVER['REMOTE_ADDR'];}
+?>
+<!-- Google Analytics Code -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89786027-1', 'auto');
+  ga('send', 'pageview', {'dimension1':  '<?=$ip;?>'});
+
+</script>
+<!-- End Google Analytics Code -->
+
+    <title><?php echo $siteTitle; ?></title>
+
+
+    <!-- uikit -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/uikit/css/uikit.almost-flat.min.css" media="all">
+
+    <!-- flag icons -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/icons/flags/flags.min.css" media="all">
+
+    <!-- altair admin -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/main.min.css" media="all">
+    <!-- chartist -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/chartist/dist/chartist.min.css">
+    <!-- kendo UI -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/kendo-ui/styles/kendo.common-material.min.css"/>
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/kendo-ui/styles/kendo.material.min.css"/>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/chosen.min.css"/>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/loader.css">
+    <!--  Form Style -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/assets/css/jquery_ui.css">
+	<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <style>
+        #page_content_inner {
+        padding: 24px 24px 0px;
+    }
+    #spinner {
+    background: rgb(249, 249, 249) url("<?php echo base_url(); ?>assets/assets/img/page-loader.gif") no-repeat scroll 50% 50%;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}   
+    ul.preview{
+        padding:0px;
+        margin:0px;
+    }
+    ul.preview li{
+        list-style: none;
+        padding:0px;
+        margin:0px;
+    }
+    .loadmore{
+        cursor:pointer;
+    }
+ 
+    </style>
+    <?php 
+    /* Check Page Current selection */
+        $page = $this->uri->segment(1);
+        $sub_page = $this->uri->segment(2); 
+        if($page == 'alert' || ($page == 'form' && $sub_page == 'edit')){
+    ?>
+     <script src="<?php echo base_url(); ?>assets/assets/js/jquery1.12.4.js"></script>
+    <!--<script src="<?php echo base_url(); ?>assets/assets/js/jquery.ui.js"></script>-->
+     <script src="<?php echo base_url(); ?>assets/assets/js/aes.js"></script>
+    <script src="<?php echo base_url(); ?>assets/assets/js/aes-json-format.js"></script>
+<?php } ?>
+<script src="<?php echo base_url(); ?>assets/assets/js/custom_localtime.js"></script>
+</head>
+<body data-baseurl="<?=base_url()?>" class="sidebar_main_open sidebar_main_swipe">
+    <!-- main header -->
+    <div id="spinner"></div>
+    <header id="header_main">
+        <div class="header_main_content">
+            <nav class="uk-navbar">
+                <!-- main sidebar switch 
+               
+                <a href="#" id="sidebar_main_toggle" class="sSwitch sSwitch_left">
+                    <span class="sSwitchIcon">
+						                    
+                    </span>
+                </a>
+
+                
+                <a href="#" id="sidebar_secondary_toggle" class="sSwitch sSwitch_right sidebar_secondary_check">
+                    <span class="sSwitchIcon"></span>
+                </a>-->
+           		<a href="#" id="sidebar_main_toggle" class="">
+                   <i class="material-icons" style="color: rgb(255, 255, 255); margin: 11px -5px; font-size: 25px;">reorder</i>
+                </a>
+                <?php echo $breadcrumbs; ?>
+                <div class="uk-navbar-flip">
+
+                    <ul class="uk-navbar-nav user_actions">
+                        <?php                         
+                            $profile_pic = $menu['profile']; 
+                        ?>
+                        <li data-uk-dropdown="{mode:'click'}">
+                            <a href="#" class="user_action_image">
+                                <img class="md-user-image" src="<?php echo base_url().'uploads/user/thumb/'.$profile_pic; ?>" alt="" style="background-color:#ededed;"/>
+                            </a>
+                            <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
+                                <ul class="uk-nav js-uk-prevent">
+                                    <li>
+                                        <a href="<?php echo base_url(); ?>myprofile/edit">
+                                            My profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo base_url(); ?>dashboard/logout/">
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            <div class="" style="float: right;display: inline-block;color: #fff; margin-right: 10px; text-align: right;">
+                <p style="font-size: 15px;line-height: 26px; margin: 0 0;">Welcome <?php echo ucfirst($this->session->userdata('name')); ?></<p><br>
+                <span style="font-size: 12px;line-height: 16px;margin: 0; display: block;"><?php echo $this->session->userdata('org_name'); ?></span>
+            </div>
+            </nav>
+        </div>
+        <div class="header_main_search_form">
+            <i class="md-icon header_main_search_close material-icons">&#xE5CD;</i>
+            <form class="uk-form">
+                <input type="text" class="header_main_search_input" />
+                <button class="header_main_search_btn uk-button-link"><i class="md-icon material-icons">&#xE8B6;</i></button>
+            </form>
+        </div>
+    </header><!-- main header end -->
+
+    <!-- main sidebar -->
+    <aside id="sidebar_main">
+        <div class="sidebar_main_header">
+            <div class="sidebar_logo">
+                <?php $org_id = $this->session->userdata('org_id');
+                    if($org_id == 1){ ?>
+                        <a href="<?php echo base_url(); ?>dashboard" class="sSidebar_hide">
+                            <img src="<?php echo base_url(); ?>assets/assets/img/logo.png" alt="" /><span>Innoforms</span>
+                        </a>
+                        <a href="<?php echo base_url(); ?>dashboard" class="sSidebar_show">
+                            <img src="<?php echo base_url(); ?>assets/assets/img/logo.png" alt="" /><span>Innoforms</span>
+                        </a>
+                <?php }  else { 
+                    $logo = $this->session->userdata('org_logo');
+                    if($logo != '' && file_exists(LOGOS_IMAGE_PATH.'/'.$logo)){
+                ?>
+                    <a href="<?php echo base_url(); ?>dashboard" class="sSidebar_hide">
+                        <img src="<?php echo base_url() .'uploads/logos/'.$logo?>" alt="" />
+                    </a>
+                    <a href="<?php echo base_url(); ?>dashboard" class="sSidebar_show">
+                        <img src="<?php echo base_url() .'uploads/logos/'.$logo?>" alt="" />
+                    </a>
+                    <?php } else { ?>
+                        <a href="<?php echo base_url(); ?>dashboard" class="sSidebar_hide">
+                            <img src="<?php echo base_url(); ?>assets/assets/img/logo.png" alt="" /><span>Innoforms</span>
+                        </a>
+                        <a href="<?php echo base_url(); ?>dashboard" class="sSidebar_show">
+                            <img src="<?php echo base_url(); ?>assets/assets/img/logo.png" alt="" /><span>Innoforms</span>
+                        </a>    
+                <?php }  }?>
+            </div>
+          
+        </div>
+        <?php  
+            /* Check Page Current selection */
+            $page = $this->uri->segment(1);
+            $sub_page = $this->uri->segment(2);
+            $menu_access = $menu;
+            $org_id = $this->session->userdata('org_id');
+        ?>
+        <div class="menu_section">
+            <ul>
+                <li  <?php if($page == 'dashboard'){ echo ' class="current_section"'; } else{ } ?> title="Dashboard">
+                    <a href="<?php echo base_url(); ?>dashboard">
+                        <span class="menu_icon"><i class="material-icons">&#xE871;</i></span>
+                        <span class="menu_title"><?php echo $this->lang->line('dashboard'); ?></span>
+                    </a>
+                </li>
+            <?php if($org_id != 1) { 
+                    if (array_key_exists('alerts', $menu_access)) { ?>
+                <li <?php if($page == 'alert'){ echo ' class="current_section"'; $alert ="alerts"; } else{$alert = 'alert'; }?> title="Inspection issues">
+                    <a href="<?php echo base_url(); ?>alert">
+                        <span class="menu_icon"><i class="material-icons <?php echo $alert; ?>"></i></span>
+                        <span class="menu_title"><?php echo $this->lang->line('alerts'); ?></span>
+                    </a>
+                </li>
+
+                <?php } ?>
+                <?php if(array_key_exists('Reviews', $menu_access)){ ?>
+                <li <?php if($page == 'todo'){ echo ' class="current_section"'; $todo ="reviews"; } else{$todo = 'review'; }?>  title="Todo">
+                    <a href="<?php echo base_url(); ?>todo">
+                        <span class="menu_icon"><i class="material-icons <?php echo $todo; ?>"></i></span>
+                        <span class="menu_title"><?php echo $this->lang->line('todo'); ?></span>
+                    </a>
+                </li>
+           <?php } } ?>
+
+            <?php  if($org_id == 1){
+                if (array_key_exists('organization', $menu_access)) { ?>
+                    <li <?php if($page == 'organization'){ echo ' class="current_section"'; $organization ="organizations"; } else{$organization = 'organization'; }?>  title="Organization">
+                        <a href="<?php echo base_url(); ?>organization">
+                            <span class="menu_icon"><i class="material-icons <?php echo $organization; ?>">&#xE8D2;</i></span>
+                            <span class="menu_title"><?php echo $this->lang->line('organization'); ?></span>
+                        </a>
+                       
+                    </li>
+                <?php }
+                if (array_key_exists('country', $menu_access)) { ?>
+                    <li <?php if($page == 'country'){ echo ' class="current_section"'; $country="countrys"; } else{ $country="country";} ?> title="Country">
+                        <a href="<?php echo base_url(); ?>country">
+                            <span class="menu_icon"><i class="material-icons <?php echo $country; ?>"></i></span>
+                            <span class="menu_title"><?php echo $this->lang->line('country'); ?></span>
+                        </a>
+                       
+                    </li>
+    		    <?php }  
+                if (array_key_exists('domain', $menu_access)) { ?>
+                    <li <?php if($page == 'domain'){ echo ' class="current_section"'; $domain ="domains"; } else{$domain = 'domain';} ?> title="Industry">
+                        <a href="<?php echo base_url(); ?>domain">
+                            <span class="menu_icon"><i class="material-icons <?php echo $domain; ?>"></i></span>
+                            <span class="menu_title"><?php echo $this->lang->line('domain'); ?></span>
+                        </a>
+                       
+                    </li>
+    		    <?php }
+                } 
+                if($org_id != 1) { 
+                    if (array_key_exists('location', $menu_access)) { ?>
+                        <li <?php if($page == 'location'){ echo ' class="current_section"'; $location ="locations"; } else{$location = 'location';}  ?> title="Jobsites">
+                        <a href="<?php echo base_url(); ?>location">
+                            <span class="menu_icon"><i class="material-icons <?php echo $location; ?>"></i></span>
+                            <span class="menu_title"><?php echo $this->lang->line('location'); ?></span>
+                        </a>
+                       
+                    </li>
+                    <?php }
+                } 
+                
+                if (array_key_exists('department', $menu_access)) { ?>
+                    <li <?php if($page == 'department'){ echo ' class="current_section"'; $department ="departments"; } else{$department = 'department';}  ?> title="Department">
+                        <a href="<?php echo base_url(); ?>department">
+                            <span class="menu_icon"><i class="material-icons <?php echo $department; ?>"></i></span>
+                            <span class="menu_title"><?php echo $this->lang->line('department'); ?></span>
+                        </a>
+                    </li>
+    	        <?php } 
+                if (array_key_exists('category', $menu_access)) { ?>
+                    <li <?php if($page == 'category'){ echo ' class="current_section"'; $category ="categories"; } else{$category = 'category'; }?> title="Category">
+                            <a href="<?php echo base_url(); ?>category">
+                                <span class="menu_icon"><i class="material-icons <?php echo $category; ?>"></i></span>
+                                <span class="menu_title"><?php echo $this->lang->line('categories'); ?></span>
+                            </a>
+                    </li>
+    	        <?php }  
+                if (array_key_exists('roles', $menu_access)) {  ?>
+                    <li <?php if($page === 'role'){ echo ' class="current_section"'; $role ="roles"; } else{$role = 'role'; }?> title="Roles">
+                        <a href="<?php echo base_url(); ?>role">
+                            <span class="menu_icon"><i class="material-icons <?php echo $role; ?>"></i></span>
+                            <span class="menu_title"><?php echo $this->lang->line('roles'); ?></span>
+                        </a>
+                    </li>
+                <?php }  
+                    if (array_key_exists('users', $menu_access)) {  ?>
+                 		<li <?php if($page == 'users'){ echo ' class="current_section"'; $user ="users"; } else{$user = 'user'; }?> title="Users">
+                            <a href="<?php echo base_url(); ?>users">
+                                <span class="menu_icon"><i class="material-icons <?php echo $user; ?>">&#xE87C;</i></span>
+                                <span class="menu_title"><?php echo $this->lang->line('users'); ?></span>
+                            </a>
+                        </li>
+                <?php }  
+                    if (array_key_exists('forms', $menu_access)) {  ?>
+                        <li <?php if($page == 'form' && $sub_page ==''){ echo ' class="current_section"'; $form ="forms"; } else{$form = 'form'; }?> title="Forms" >
+                                <a href="<?php echo base_url(); ?>form">
+                                    <span class="menu_icon"><i class="material-icons <?php echo $form; ?>">&#xE24D;</i></span>
+                                    <span class="menu_title"><?php echo $this->lang->line('forms'); ?></span>
+                                </a>
+                        </li>
+                <?php }
+                    if($org_id != 1){
+                    if (array_key_exists('forms', $menu_access) && in_array('create',$menu_access['forms'])) {  ?>
+                        <li <?php if($page == 'workflow' || ($page == 'workflow' && $sub_page =='edit')){ echo ' class="current_section"'; $form ="workflow"; } else{$form = 'workflows'; }?>>
+                                <a href="<?php echo base_url(); ?>workflow">
+                                    <span class="menu_icon"><i class="material-icons <?php echo $form; ?>"></i></span>
+                                    <span class="menu_title"><?php echo $this->lang->line('workflows'); ?></span>
+                                </a>
+                        </li>
+                <?php } } 
+                    if (array_key_exists('submission', $menu_access)) {  ?>
+                        <li <?php if($page == 'form'){ echo ' class="current_section"'; $form ="forms"; } else{$form = 'form'; }?> title="Workflows">
+                            <a href="<?php echo base_url(); ?>form">
+                                <span class="menu_icon"><i class="material-icons <?php echo $form; ?>">&#xE24D;</i></span>
+                                <span class="menu_title"><?php echo $this->lang->line('submissions'); ?></span>
+                            </a>
+                        </li>
+                <?php } ?>                  
+            </ul>
+        </div>       
+    </aside><!-- main sidebar end -->
